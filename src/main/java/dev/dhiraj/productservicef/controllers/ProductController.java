@@ -1,10 +1,12 @@
 package dev.dhiraj.productservicef.controllers;
 
 import dev.dhiraj.productservicef.dtos.CreateProductDto;
+import dev.dhiraj.productservicef.dtos.FakeStoreProductDto;
 import dev.dhiraj.productservicef.exceptions.NotFoundException;
 import dev.dhiraj.productservicef.exceptions.ProductNotCreatedException;
 import dev.dhiraj.productservicef.models.Product;
 import dev.dhiraj.productservicef.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("selfProductService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -51,8 +53,8 @@ public class ProductController {
 //    }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody CreateProductDto productD) throws ProductNotCreatedException {
-        Product product = productService.createProduct(productD);
+    public ResponseEntity<Product> createProduct(@RequestBody CreateProductDto request) throws ProductNotCreatedException {
+            Product product = productService.createProduct(request.getTitle(), request.getDescription(), request.getCategory(), request.getImage(), request.getPrice());
         if (product == null) {
             throw new ProductNotCreatedException("Product Not Created");
         }

@@ -15,5 +15,5 @@ public interface ProductService {
 
     Product deleteProduct(Long id);
 
-    Product createProduct(CreateProductDto product) throws ProductNotCreatedException;
+    Product createProduct(String title, String description, String category, String ImageUrl, double price) throws ProductNotCreatedException;
 }

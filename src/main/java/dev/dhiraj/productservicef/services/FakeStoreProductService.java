@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-@Service
+@Service("FakeStroeProductService")
 public class FakeStoreProductService implements  ProductService{
 
     private FakeStoreProductServiceClient fakeStoreProductServiceClient;
@@ -43,8 +43,15 @@ public class FakeStoreProductService implements  ProductService{
     }
 
     @Override
-    public Product createProduct(CreateProductDto product) throws ProductNotCreatedException {
-        fakeStoreProductServiceClient.createProduct(product);
+    public Product createProduct(String title, String description, String category, String ImageUrl, double price) throws ProductNotCreatedException {
+        FakeStoreProductDto productDto = new FakeStoreProductDto();
+        productDto.setTitle(title);
+        productDto.setDescription(description);
+        productDto.setCategory(category);
+        productDto.setImage(ImageUrl);
+        productDto.setPrice(price);
+
+        fakeStoreProductServiceClient.createProduct(productDto);
         //Always returning null to check throw ProductNotCreatedException.\
         return null;
     }

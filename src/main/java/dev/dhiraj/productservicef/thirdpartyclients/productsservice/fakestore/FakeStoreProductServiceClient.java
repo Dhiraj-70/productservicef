@@ -61,7 +61,7 @@ public class FakeStoreProductServiceClient {
         return response.getBody();
     }
 
-    public FakeStoreProductDto createProduct(CreateProductDto product) throws ProductNotCreatedException {
+    public FakeStoreProductDto createProduct(FakeStoreProductDto product) throws ProductNotCreatedException {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<FakeStoreProductDto> response = restTemplate.postForEntity(
                 productRequestsBaseUrl, product, FakeStoreProductDto.class
