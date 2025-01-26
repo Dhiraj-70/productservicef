@@ -1,6 +1,7 @@
 package dev.dhiraj.productservicef;
 
 import dev.dhiraj.productservicef.repositories.ProductRepository;
+import dev.dhiraj.productservicef.repositories.projections.ProductProjection;
 import dev.dhiraj.productservicef.repositories.projections.ProductWithTitleAndId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,12 @@ class ProductservicefApplicationTests {
         List<ProductWithTitleAndId> productWithTitleAndIds = productRepository.getTitleOfProductsOfGivenCategory(2L);
         System.out.println(productWithTitleAndIds.get(0).getTitle());
         System.out.println(productWithTitleAndIds.get(0).getId());
+    }
+
+    @Test
+    void projectProjectionQueries(){
+        List<ProductProjection> prodProj = productRepository.getTitleAndDescriptionOfGivenProduct(1L);
+        System.out.println(prodProj.get(0).getDescription());
+        System.out.println(prodProj.get(0).getTitle());
     }
 }

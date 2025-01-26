@@ -1,6 +1,7 @@
 package dev.dhiraj.productservicef.repositories;
 
 import dev.dhiraj.productservicef.models.Product;
+import dev.dhiraj.productservicef.repositories.projections.ProductProjection;
 import dev.dhiraj.productservicef.repositories.projections.ProductWithTitleAndId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,5 +22,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select p.title as title, p.id as id from Product p where p.category.id = :catId")
     List<ProductWithTitleAndId> getTitleOfProductsOfGivenCategory(@Param("catId") Long categoryId);
 
+    @Query("select p.title as title, p.description as description from Product p where p.id = :pID")
+    List<ProductProjection> getTitleAndDescriptionOfGivenProduct(@Param("pID") Long productId);
 
 }
