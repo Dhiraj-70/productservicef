@@ -1,6 +1,8 @@
 package dev.dhiraj.productservicef;
 
+import dev.dhiraj.productservicef.repositories.CategoryRepository;
 import dev.dhiraj.productservicef.repositories.ProductRepository;
+import dev.dhiraj.productservicef.repositories.projections.CategoryProjection;
 import dev.dhiraj.productservicef.repositories.projections.ProductProjection;
 import dev.dhiraj.productservicef.repositories.projections.ProductWithTitleAndId;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,9 @@ class ProductservicefApplicationTests {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
     @Test
     void contextLoads() {
     }
@@ -46,5 +51,11 @@ class ProductservicefApplicationTests {
         List<ProductProjection> prodProj = productRepository.getTitleAndDescriptionOfGivenProduct(1L);
         System.out.println(prodProj.get(0).getDescription());
         System.out.println(prodProj.get(0).getTitle());
+    }
+
+    @Test
+    void categoryProjectionQueries(){
+        List<CategoryProjection> catDet = categoryRepository.checkSomeThingComplex(2L, "Electronics");
+        System.out.println(catDet.get(0).getTitle());
     }
 }
