@@ -23,4 +23,11 @@ class ProductservicefApplicationTests {
         // from product p1_0 where p1_0.title=?
     }
 
+    @Test
+    void testingQueries2(){
+        System.out.println("getProductWithParticularName....");
+        productRepository.getProductWithParticularName("Electronics", 2L);
+        System.out.println("done....");
+    }
+
 }
