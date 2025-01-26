@@ -17,4 +17,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Product getProductWithParticularName(@Param("title") String title,
                                          @Param("productId") Long productId);
 
+    @Query("select p.title as title, p.id as id from Product p where p.category.id = :catId")
+    List<ProductWithTitleAndId> getTitleOfProductsOfGivenCategory(@Param("catId") Long categoryId);
+
+
 }
