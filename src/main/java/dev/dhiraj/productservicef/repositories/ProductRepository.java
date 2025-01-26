@@ -1,6 +1,7 @@
 package dev.dhiraj.productservicef.repositories;
 
 import dev.dhiraj.productservicef.models.Product;
+import dev.dhiraj.productservicef.repositories.projections.ProductWithTitleAndId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

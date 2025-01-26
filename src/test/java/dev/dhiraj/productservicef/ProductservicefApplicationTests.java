@@ -1,7 +1,7 @@
 package dev.dhiraj.productservicef;
 
 import dev.dhiraj.productservicef.repositories.ProductRepository;
-import dev.dhiraj.productservicef.repositories.ProductWithTitleAndId;
+import dev.dhiraj.productservicef.repositories.projections.ProductWithTitleAndId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
