@@ -4,6 +4,8 @@ import dev.dhiraj.productservicef.models.Product;
 import dev.dhiraj.productservicef.repositories.projections.CategoryProjection;
 import dev.dhiraj.productservicef.repositories.projections.ProductProjection;
 import dev.dhiraj.productservicef.repositories.projections.ProductWithTitleAndId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,4 +30,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p.title as title, p.description as description from Product p where p.id = :pID")
     List<ProductProjection> getTitleAndDescriptionOfGivenProduct(@Param("pID") Long productId);
+
+    Page<Product> findByTitleContaining(String query, Pageable pageable);
 }
