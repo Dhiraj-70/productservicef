@@ -1,7 +1,6 @@
 package dev.dhiraj.productservicef.controllers;
 
 import dev.dhiraj.productservicef.dtos.CreateProductDto;
-import dev.dhiraj.productservicef.dtos.FakeStoreProductDto;
 import dev.dhiraj.productservicef.exceptions.NotFoundException;
 import dev.dhiraj.productservicef.exceptions.ProductNotCreatedException;
 import dev.dhiraj.productservicef.models.Product;
@@ -17,7 +16,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
-    public ProductController(@Qualifier("selfProductService") ProductService productService) {
+    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService) {
         this.productService = productService;
     }
 

@@ -7,18 +7,20 @@ import dev.dhiraj.productservicef.exceptions.ProductNotCreatedException;
 import dev.dhiraj.productservicef.models.Product;
 import dev.dhiraj.productservicef.thirdpartyclients.productsservice.fakestore.FakeStoreProductServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-@Service("FakeStroeProductService")
+@Service("fakeStoreProductService")
 public class FakeStoreProductService implements  ProductService{
 
     private FakeStoreProductServiceClient fakeStoreProductServiceClient;
-
+    private RedisTemplate<String, Object> redisTemplate;
     @Autowired
-    public FakeStoreProductService(FakeStoreProductServiceClient fakeStoreProductServiceClient) {
+    public FakeStoreProductService(FakeStoreProductServiceClient fakeStoreProductServiceClient, RedisTemplate<String, Object> redisTemplate) {
         this.fakeStoreProductServiceClient = fakeStoreProductServiceClient;
+        this.redisTemplate = redisTemplate;
     }
 
     @Override
@@ -32,7 +34,13 @@ public class FakeStoreProductService implements  ProductService{
 
     @Override
     public Product getProductById(Long id) throws NotFoundException {
+//        Product product = (Product) redisTemplate.opsForValue().get(String.valueOf(id));
+//        if (product != null) {
+//            return product;
+//        }
+
         FakeStoreProductDto productDto = fakeStoreProductServiceClient.getSingleProduct(id);
+//        redisTemplate.opsForValue().set(String.valueOf(id), productDto.toProduct());
         return productDto.toProduct();
     }
 
